@@ -1,5 +1,6 @@
 "use client";
 
+import { LocaleProvider } from "@/lib/locale-context";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
@@ -12,7 +13,7 @@ import { Footer } from "@/components/sections/footer";
 
 export default function Home() {
   return (
-    <>
+    <LocaleProvider>
       <Navbar />
       <main>
         <Hero />
@@ -24,6 +25,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </LocaleProvider>
   );
 }

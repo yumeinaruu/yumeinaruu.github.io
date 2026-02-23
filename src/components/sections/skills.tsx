@@ -2,15 +2,11 @@
 
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { useLocale } from "@/lib/locale-context";
 
-interface SkillCategory {
-  title: string;
-  skills: string[];
-}
-
-const categories: SkillCategory[] = [
+const skillData = [
   {
-    title: "Backend",
+    key: "backend" as const,
     skills: [
       "Kotlin",
       "Java",
@@ -25,20 +21,15 @@ const categories: SkillCategory[] = [
     ],
   },
   {
-    title: "DevOps",
+    key: "devops" as const,
     skills: ["Docker", "Linux", "Nginx", "Git", "GitLab CI/CD"],
   },
   {
-    title: "Databases",
-    skills: [
-      "PostgreSQL",
-      "Redis",
-      "SQL",
-      "Database Design",
-    ],
+    key: "databases" as const,
+    skills: ["PostgreSQL", "Redis", "SQL", "Database Design"],
   },
   {
-    title: "Architecture & Principles",
+    key: "architecture" as const,
     skills: [
       "Microservices",
       "Clean Architecture",
@@ -70,18 +61,20 @@ const badgeVariants = {
 };
 
 export function Skills() {
+  const { t } = useLocale();
+
   return (
     <section id="skills" className="relative px-6 py-32">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          title="Skills"
-          subtitle="Technologies and tools I work with"
+          title={t.skills.heading}
+          subtitle={t.skills.subtitle}
         />
 
         <div className="grid gap-8 sm:grid-cols-2">
-          {categories.map((cat, catIndex) => (
+          {skillData.map((cat, catIndex) => (
             <motion.div
-              key={cat.title}
+              key={cat.key}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -89,7 +82,7 @@ export function Skills() {
               className="glass rounded-2xl p-8"
             >
               <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-primary">
-                {cat.title}
+                {t.skills.categories[cat.key]}
               </h3>
               <motion.div
                 variants={containerVariants}

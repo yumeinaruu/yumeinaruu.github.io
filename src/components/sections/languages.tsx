@@ -3,24 +3,25 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Globe } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
-const languages = [
-  { name: "English", level: "B2", percent: 70 },
-  { name: "Russian", level: "Native", percent: 100 },
-  { name: "Belarusian", level: "Native", percent: 100 },
-  { name: "Japanese", level: "N5", percent: 20 },
-];
+const percents = [70, 100, 100, 20];
 
 export function Languages() {
+  const { t } = useLocale();
+
   return (
     <section className="relative px-6 py-32">
       <div className="mx-auto max-w-4xl">
-        <SectionHeading title="Languages" subtitle="Communication skills" />
+        <SectionHeading
+          title={t.languages.heading}
+          subtitle={t.languages.subtitle}
+        />
 
         <div className="mx-auto grid max-w-2xl gap-5">
-          {languages.map((lang, i) => (
+          {t.languages.items.map((lang, i) => (
             <motion.div
-              key={lang.name}
+              key={i}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -42,9 +43,13 @@ export function Languages() {
               <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: `${lang.percent}%` }}
+                  whileInView={{ width: `${percents[i]}%` }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1, delay: 0.2 + i * 0.1, ease: "easeOut" }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.2 + i * 0.1,
+                    ease: "easeOut",
+                  }}
                   className="h-full rounded-full bg-gradient-to-r from-primary to-primary/60"
                 />
               </div>

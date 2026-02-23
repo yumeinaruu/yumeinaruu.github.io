@@ -4,29 +4,32 @@ import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, ArrowUpRight } from "lucide-react";
-
-const contactItems = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "stas.lisavoy@icloud.com",
-    href: "mailto:stas.lisavoy@icloud.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+375 29 745 06 89",
-    href: "tel:+375297450689",
-  },
-];
+import { useLocale } from "@/lib/locale-context";
 
 export function Contact() {
+  const { t } = useLocale();
+
+  const contactItems = [
+    {
+      icon: Mail,
+      label: t.contact.email,
+      value: "stas.lisavoy@icloud.com",
+      href: "mailto:stas.lisavoy@icloud.com",
+    },
+    {
+      icon: Phone,
+      label: t.contact.phone,
+      value: "+375 29 745 06 89",
+      href: "tel:+375297450689",
+    },
+  ];
+
   return (
     <section id="contact" className="relative px-6 py-32">
       <div className="mx-auto max-w-4xl">
         <SectionHeading
-          title="Get in Touch"
-          subtitle="Let's discuss your next project"
+          title={t.contact.heading}
+          subtitle={t.contact.subtitle}
         />
 
         <div className="mx-auto grid max-w-lg gap-4">
@@ -68,7 +71,7 @@ export function Contact() {
           <Button asChild size="lg" className="gap-2 px-10">
             <a href="mailto:stas.lisavoy@icloud.com">
               <Mail size={16} />
-              Send Email
+              {t.contact.sendEmail}
             </a>
           </Button>
         </motion.div>

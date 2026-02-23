@@ -3,24 +3,31 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-
-const links = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
-];
+import { useLocale } from "@/lib/locale-context";
+import type { Locale } from "@/lib/i18n";
 
 export function Navbar() {
+  const { locale, setLocale, t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const links = [
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.experience, href: "#experience" },
+    { label: t.nav.skills, href: "#skills" },
+    { label: t.nav.education, href: "#education" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const toggleLocale = () => {
+    setLocale(locale === "en" ? "ru" : "en" as Locale);
+  };
 
   return (
     <motion.header
@@ -37,27 +44,43 @@ export function Navbar() {
         </a>
 
         {/* Desktop */}
-        <ul className="hidden gap-8 md:flex">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden items-center gap-8 md:flex">
+          <ul className="flex gap-8">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm text-muted-foreground transition-colors duration-300 hover:text-foreground"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={toggleLocale}
+            className="rounded-lg border border-border/50 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+          >
+            {locale === "en" ? "RU" : "EN"}
+          </button>
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="text-muted-foreground transition-colors hover:text-foreground md:hidden"
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile */}
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={toggleLocale}
+            className="rounded-lg border border-border/50 px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {locale === "en" ? "RU" : "EN"}
+          </button>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedGradientBg } from "@/components/ui/animated-gradient-bg";
+import { useLocale } from "@/lib/locale-context";
 
 export function Hero() {
+  const { t } = useLocale();
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
       <AnimatedGradientBg />
 
-      {/* Grid pattern overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
@@ -32,7 +34,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-6 inline-block rounded-full border border-border/50 bg-secondary/50 px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground"
           >
-            Available for opportunities
+            {t.hero.badge}
           </motion.div>
         </motion.div>
 
@@ -42,8 +44,8 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl"
         >
-          Stanislav{" "}
-          <span className="gradient-text">Lisovoy</span>
+          {t.hero.firstName}{" "}
+          <span className="gradient-text">{t.hero.lastName}</span>
         </motion.h1>
 
         <motion.p
@@ -52,7 +54,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="mt-4 text-xl font-medium text-muted-foreground sm:text-2xl"
         >
-          Backend Developer
+          {t.hero.title}
         </motion.p>
 
         <motion.p
@@ -61,8 +63,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.55, ease: "easeOut" }}
           className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-muted-foreground/80"
         >
-          Building robust, scalable backend systems with clean architecture.
-          Turning complex requirements into elegant solutions.
+          {t.hero.tagline}
         </motion.p>
 
         <motion.div
@@ -74,19 +75,18 @@ export function Hero() {
           <Button asChild size="lg" className="group gap-2 px-8">
             <a href="#contact">
               <Mail size={16} />
-              Contact Me
+              {t.hero.contactMe}
             </a>
           </Button>
           <Button asChild variant="outline" size="lg" className="gap-2 px-8">
             <a href="#experience">
               <ArrowDown size={16} />
-              View Experience
+              {t.hero.viewExperience}
             </a>
           </Button>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
