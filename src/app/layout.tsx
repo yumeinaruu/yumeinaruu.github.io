@@ -13,23 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stanislav Lisovoy — Backend Developer",
+  title: "Stanislau Lisavy — Backend Developer",
   description:
-    "Backend developer specializing in Kotlin, Spring Boot, and distributed systems. Building robust, scalable server-side architectures.",
+    "Backend developer specializing in Kotlin, Spring Boot, and fintech systems. Building robust, scalable server-side architectures.",
   keywords: [
     "Backend Developer",
     "Kotlin",
     "Spring Boot",
     "Java",
-    "Django",
     "PostgreSQL",
     "Microservices",
   ],
-  authors: [{ name: "Stanislav Lisovoy" }],
+  authors: [{ name: "Stanislau Lisavy" }],
   openGraph: {
-    title: "Stanislav Lisovoy — Backend Developer",
+    title: "Stanislau Lisavy — Backend Developer",
     description:
-      "Backend developer specializing in Kotlin, Spring Boot, and distributed systems.",
+      "Backend developer specializing in Kotlin, Spring Boot, and fintech systems.",
     type: "website",
   },
 };
