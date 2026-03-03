@@ -44,7 +44,7 @@ const translations = {
     },
     experience: {
       heading: "Experience",
-      subtitle: "Professional journey and key projects",
+      subtitle: "Background and Key Projects",
       company: "LLC Krainet",
       role: "Backend Developer",
       period: "July 2024 — Present",
